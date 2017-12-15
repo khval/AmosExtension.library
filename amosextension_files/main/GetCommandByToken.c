@@ -28,7 +28,7 @@
 *      GetCommandByToken -- Description
 *
 *   SYNOPSIS
-*      void GetCommandByToken(short token);
+*      unsigned int GetCommandByToken(unsigned short token);
 *
 *   FUNCTION
 *
@@ -36,7 +36,7 @@
 *       token - 
 *
 *   RESULT
-*       This function does not return a result
+*       The result ...
 *
 *   EXAMPLE
 *
@@ -50,9 +50,9 @@
 *
 */
 
-void _amosextension_GetCommandByToken(struct amosextensionIFace *Self,
-       short token)
+unsigned int _amosextension_GetCommandByToken(struct amosextensionIFace *Self,
+       unsigned short token)
 {
-
+  return 0;
 }
 

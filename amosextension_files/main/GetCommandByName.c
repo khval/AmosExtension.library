@@ -28,7 +28,7 @@
 *      GetCommandByName -- Description
 *
 *   SYNOPSIS
-*      void GetCommandByName(char * name);
+*      unsigned int GetCommandByName(char * name);
 *
 *   FUNCTION
 *
@@ -36,7 +36,7 @@
 *       name - 
 *
 *   RESULT
-*       This function does not return a result
+*       The result ...
 *
 *   EXAMPLE
 *
@@ -50,9 +50,9 @@
 *
 */
 
-void _amosextension_GetCommandByName(struct amosextensionIFace *Self,
+unsigned int _amosextension_GetCommandByName(struct amosextensionIFace *Self,
        char * name)
 {
-
+  return 0;
 }
 
