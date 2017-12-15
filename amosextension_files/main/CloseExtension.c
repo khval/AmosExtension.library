@@ -28,7 +28,7 @@
 *      CloseExtension -- Description
 *
 *   SYNOPSIS
-*      void CloseExtension(struct AmosExtension * extension);
+*      void CloseExtension(struct extension * extension);
 *
 *   FUNCTION
 *
@@ -50,9 +50,14 @@
 *
 */
 
-void _amosextension_CloseExtension(struct amosextensionIFace *Self,
-       struct AmosExtension * extension)
+void _amosextension_CloseExtension(struct amosextensionIFace *Self,   struct extension * ext)
 {
+	struct _Library *libBase = (struct _Library *) Self -> Data.LibBase;
 
+	if (ext)
+	{
+		if (ext->file) libBase -> IExec -> FreeVec( ext -> file );
+		libBase -> IExec -> FreeVec( ext );
+	}
 }
 

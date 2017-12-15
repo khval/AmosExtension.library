@@ -18,9 +18,12 @@
 #include <proto/exec.h>
 #include <dos/dos.h>
 #include <exec/types.h>
+#include <proto/dos.h>
 #include <libraries/amosextension.h>
 #include <proto/amosextension.h>
 #include <stdarg.h>
+
+#include "../libbase.h"
 
 /****** amosextension/main/OpenExtension ******************************************
 *
@@ -28,7 +31,7 @@
 *      OpenExtension -- Description
 *
 *   SYNOPSIS
-*      struct AmosExtension * OpenExtension(char * name);
+*      struct extension * OpenExtension(char * name);
 *
 *   FUNCTION
 *
@@ -50,9 +53,28 @@
 *
 */
 
-struct AmosExtension * _amosextension_OpenExtension(struct amosextensionIFace *Self,
+struct extension * _amosextension_OpenExtension(struct amosextensionIFace *Self,
        char * name)
 {
-  return NULL;
+	struct _Library *libBase = (struct _Library *) Self -> Data.LibBase;
+	struct extension *ext;
+	BPTR file;
+	unsigned int filesize;
+
+	ext = (struct extension *) libBase->IExec->AllocVecTags( sizeof(struct extension) , AVT_Type, MEMF_SHARED, AVT_ClearWithValue, 0 , TAG_END );
+
+	if (ext)
+	{
+		file = libBase -> IDOS -> FOpen( name , MODE_OLDFILE, 0 );
+		if (file)
+		{
+			filesize = libBase -> IDOS -> GetFileSize( file );
+			ext -> file = (char *)  libBase -> IExec -> AllocVecTags( filesize , AVT_Type, MEMF_SHARED, AVT_ClearWithValue, 0 , TAG_END );
+			if (ext -> file)  libBase -> IDOS -> FRead( file, ext -> file, filesize, 1 );
+			libBase -> IDOS -> FClose( file );
+		}
+	}
+
+	return NULL;
 }
 
