@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE library SYSTEM "library.dtd">
+<library name="amosextension" basename="amosExtensionBase" openname="amosextension.library">
+	<include>exec/types.h</include>
+	<include>libraries/amosextension.h</include>
+	<interface name="main" version="1.0" struct="amosextensionIFace" prefix="_amosextension_" asmprefix="Iamosextension" global="Iamosextension">
+		<method name="Obtain" result="ULONG"/>
+		<method name="Release" result="ULONG"/>
+		<method name="Expunge" result="void" status="unimplemented"/>
+		<method name="Clone" result="struct Interface *" status="unimplemented"/>
+		<method name="OpenExtension" result="struct AmosExtension *">
+			<arg name="name" type="char *"/>
+		</method>
+		<method name="CloseExtension" result="void">
+			<arg name="extension" type="struct AmosExtension *"/>
+		</method>
+		<method name="GetCommandByName" result="void">
+			<arg name="name" type="char *"/>
+		</method>
+		<method name="GetCommandByToken" result="void">
+			<arg name="token" type="short"/>
+		</method>
+	</interface>
+</library>
+
