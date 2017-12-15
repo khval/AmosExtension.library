@@ -51,6 +51,6 @@
 
 ULONG _amosextension_Obtain(struct amosextensionIFace *Self)
 {
-	return Self -> Data.RefCount++;
+    return Self -> Data.RefCount++;
 }
 
