@@ -50,7 +50,7 @@
 *
 */
 
-unsigned int _amosextension_GetCommandByName(struct amosextensionIFace *Self,
+unsigned int _amosextension_GetCommandByName(struct AmosExtensionIFace *Self,
        char * name)
 {
   return 0;

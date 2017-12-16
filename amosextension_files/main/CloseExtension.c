@@ -22,6 +22,8 @@
 #include <proto/amosextension.h>
 #include <stdarg.h>
 
+#include "../libbase.h"
+
 /****** amosextension/main/CloseExtension ******************************************
 *
 *   NAME
@@ -50,7 +52,7 @@
 *
 */
 
-void _amosextension_CloseExtension(struct amosextensionIFace *Self,   struct extension * ext)
+void _amosextension_CloseExtension(struct AmosExtensionIFace *Self,   struct extension * ext)
 {
 	struct _Library *libBase = (struct _Library *) Self -> Data.LibBase;
 

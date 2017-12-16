@@ -50,7 +50,7 @@
 *
 */
 
-unsigned int _amosextension_GetCommandByToken(struct amosextensionIFace *Self,
+unsigned int _amosextension_GetCommandByToken(struct AmosExtensionIFace *Self,
        unsigned short token)
 {
   return 0;
