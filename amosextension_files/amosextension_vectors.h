@@ -18,6 +18,6 @@
 extern ULONG                VARARGS68K _amosextension_Obtain(struct amosextensionIFace *);
 extern ULONG                VARARGS68K _amosextension_Release(struct amosextensionIFace *);
 extern struct AmosExtension * VARARGS68K _amosextension_OpenExtension(struct amosextensionIFace *, char * name);
-extern void                 VARARGS68K _amosextension_CloseExtension(struct amosextensionIFace *, struct AmosExtension * extension);
-extern void                 VARARGS68K _amosextension_GetCommandByName(struct amosextensionIFace *, char * name);
-extern void                 VARARGS68K _amosextension_GetCommandByToken(struct amosextensionIFace *, short token);
+extern void                 VARARGS68K _amosextension_CloseExtension(struct amosextensionIFace *, struct extension * extension);
+extern unsigned int         VARARGS68K _amosextension_GetCommandByName(struct amosextensionIFace *, char * name);
+extern unsigned int         VARARGS68K _amosextension_GetCommandByToken(struct amosextensionIFace *, unsigned short token);
