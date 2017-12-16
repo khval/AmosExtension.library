@@ -89,7 +89,7 @@ STATIC APTR libExpunge(struct LibraryManagerInterface *Self)
     /* If your library cannot be expunged, return 0 */
     struct ExecIFace *IExec
         = (struct ExecIFace *)(*(struct ExecBase **)4)->MainInterface;
-    APTR result = (APTR)0;
+    APTR result = (APTR) 0;
     struct _Library *libBase = (struct _Library *)Self->Data.LibBase;
     if (libBase->libNode.lib_OpenCnt == 0)
     {
@@ -97,7 +97,7 @@ STATIC APTR libExpunge(struct LibraryManagerInterface *Self)
 		/* Undo what the init code did */
 
 		IExec->Remove((struct Node *)libBase);
-		IExec->DeleteLibrary((struct _Library *)libBase);
+		IExec->DeleteLibrary((struct Library *)libBase);
 
 		if (libBase->IDOS) IExec->DropInterface( (struct Interface *) libBase->IDOS);
 		if (libBase->DOSBase) IExec->CloseLibrary( libBase->DOSBase );
@@ -131,6 +131,8 @@ STATIC struct Library *libInit(struct _Library *LibraryBase, APTR seglist, struc
 
     /* Add additional init code here if you need it. For example, to open additional
        Libraries: */
+
+	libBase -> IExec = IExec;
 
 	libBase->DOSBase = IExec->OpenLibrary("dos.library", 53L);
 	if (libBase->DOSBase)
