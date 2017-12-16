@@ -53,7 +53,7 @@
 *
 */
 
-struct extension * _amosextension_OpenExtension(struct amosextensionIFace *Self,
+struct extension * _amosextension_OpenExtension(struct AmosExtensionIFace *Self,
        char * name)
 {
 	struct _Library *libBase = (struct _Library *) Self -> Data.LibBase;
@@ -70,11 +70,19 @@ struct extension * _amosextension_OpenExtension(struct amosextensionIFace *Self,
 		{
 			filesize = libBase -> IDOS -> GetFileSize( file );
 			ext -> file = (char *)  libBase -> IExec -> AllocVecTags( filesize , AVT_Type, MEMF_SHARED, AVT_ClearWithValue, 0 , TAG_END );
-			if (ext -> file)  libBase -> IDOS -> FRead( file, ext -> file, filesize, 1 );
+			if (ext -> file)
+			{
+				libBase -> IDOS -> FRead( file, ext -> file, filesize, 1 );
+			}
 			libBase -> IDOS -> FClose( file );
+		}	
+		else
+		{
+			libBase -> IExec -> FreeVec(ext);
+			ext = NULL;
 		}
 	}
 
-	return NULL;
+	return ext;
 }
 
