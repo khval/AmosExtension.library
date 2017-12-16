@@ -1,6 +1,6 @@
 copy /include/#? sdk:Include/include_h/ all
 
-IF EXISTS retromode.library
+IF EXISTS amosextension.library
 copy amosextension.library libs:
 endif
 
