@@ -19,6 +19,8 @@ struct fileHeader
 struct extension
 {
 	char *file;
-	short *sizeTable;
+	struct fileHeader *header;
+	unsigned short *sizeTable;
 	struct command *commands;
 };
+
