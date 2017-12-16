@@ -37,6 +37,36 @@ void closedown()
 	if (AmosExtensionBase) CloseLibrary(AmosExtensionBase); AmosExtensionBase = 0;
 }
 
+void dump_list(unsigned short *ptr , int cnt)
+{
+	int n = 0;
+	unsigned int off = 0;
+
+	for(n=0;n<cnt;n++)
+	{
+		printf("%3d\t%08x\t%04X (%d)\n",n, off, *ptr,(int) (*ptr *2) );
+
+		off += (*ptr *2);
+		ptr++;
+	}
+
+	printf("\nSize %d\n\n",off);
+}
+
+void hex_dumpt(unsigned int *ptr)
+{
+	int x = 0;
+	unsigned int off = 0;
+
+	for(x=0;x<4;x++)
+	{
+		printf("%08x", *ptr *2 );
+	}
+
+	printf("\nSize %d\n\n",off);
+}
+
+
 int main()
 {
 	struct extension *ext;
@@ -45,11 +75,29 @@ int main()
 	{
 		printf("** lib opened **\n");
 
-		ext = OpenExtension( (char *) "amospro:APSystem/AMOSPro_Ldos.lib");
+		ext = OpenExtension( (char *) "amospro:APSystem/AMOSPro_Request.lib");
+//		ext = OpenExtension( (char *) "amospro:APSystem/AMOSPro_Music.lib");
+//		ext = OpenExtension( (char *) "amospro:APSystem/AMOSPro_Ldos.lib");
 
 		if (ext)
 		{
 			printf(" ** extention open ** \n");
+
+			printf("%6d  (%04x)\n", ext -> header-> C_off_size, ext -> header-> C_off_size );
+			printf("%6d  (%04x)\n", ext -> header-> C_tk_size, ext -> header-> C_tk_size );
+			printf("%6d  (%04x)\n", ext -> header-> C_lib_size, ext -> header-> C_lib_size );
+			printf("%6d  (%04x)\n", ext -> header-> C_title_size, ext -> header-> C_title_size );
+
+			printf("end %d\n", ext -> header -> end );
+
+//			ext -> sizeTable = (unsigned short *) ((char *) ext -> file + 0x20 + sizeof(struct extension) + 0x2 );
+
+			dump_list( ext -> sizeTable, ext -> header->C_off_size / 2 );
+
+			printf("off size %08X - %d ---- %08x\n", 
+					ext -> header->C_off_size,
+					ext -> header->C_off_size,
+					((char *) ext -> header - (char *) ext -> file));
 
 			CloseExtension(ext);
 		}
