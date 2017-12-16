@@ -70,6 +70,10 @@ struct extension * _amosextension_OpenExtension(struct AmosExtensionIFace *Self,
 		{
 			filesize = libBase -> IDOS -> GetFileSize( file );
 			ext -> file = (char *)  libBase -> IExec -> AllocVecTags( filesize , AVT_Type, MEMF_SHARED, AVT_ClearWithValue, 0 , TAG_END );
+			ext -> header = (struct fileHeader *)	( (char *) ( ext -> file + 0x20) );
+
+			ext -> sizeTable = (unsigned short *) ((char *) ext -> file + 0x20 + sizeof(struct extension) + 0x2 );
+
 			if (ext -> file)
 			{
 				libBase -> IDOS -> FRead( file, ext -> file, filesize, 1 );
