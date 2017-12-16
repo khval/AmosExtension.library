@@ -27,18 +27,18 @@ namespace AmigaOS {
 extern "C" {
 #endif
 
-struct amosextensionIFace
+struct AmosExtensionIFace
 {
 	struct InterfaceData Data;
 
-	ULONG APICALL (*Obtain)(struct amosextensionIFace *Self);
-	ULONG APICALL (*Release)(struct amosextensionIFace *Self);
-	void APICALL (*Expunge)(struct amosextensionIFace *Self);
-	struct Interface * APICALL (*Clone)(struct amosextensionIFace *Self);
-	struct AmosExtension * APICALL (*OpenExtension)(struct amosextensionIFace *Self, char * name);
-	void APICALL (*CloseExtension)(struct amosextensionIFace *Self, struct AmosExtension * extension);
-	void APICALL (*GetCommandByName)(struct amosextensionIFace *Self, char * name);
-	void APICALL (*GetCommandByToken)(struct amosextensionIFace *Self, short token);
+	ULONG APICALL (*Obtain)(struct AmosExtensionIFace *Self);
+	ULONG APICALL (*Release)(struct AmosExtensionIFace *Self);
+	void APICALL (*Expunge)(struct AmosExtensionIFace *Self);
+	struct Interface * APICALL (*Clone)(struct AmosExtensionIFace *Self);
+	struct extension * APICALL (*OpenExtension)(struct AmosExtensionIFace *Self, char * name);
+	void APICALL (*CloseExtension)(struct AmosExtensionIFace *Self, struct extension * extension);
+	unsigned int APICALL (*GetCommandByName)(struct AmosExtensionIFace *Self, char * name);
+	unsigned int APICALL (*GetCommandByToken)(struct AmosExtensionIFace *Self, unsigned short token);
 };
 
 #ifdef __cplusplus

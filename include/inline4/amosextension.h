@@ -26,9 +26,9 @@
 #include <interfaces/amosextension.h>
 
 /* Inline macros for Interface "main" */
-#define OpenExtension(name) Iamosextension->OpenExtension((name)) 
-#define CloseExtension(extension) Iamosextension->CloseExtension((extension)) 
-#define GetCommandByName(name) Iamosextension->GetCommandByName((name)) 
-#define GetCommandByToken(token) Iamosextension->GetCommandByToken((token)) 
+#define OpenExtension(name) IAmosExtension->OpenExtension((name)) 
+#define CloseExtension(extension) IAmosExtension->CloseExtension((extension)) 
+#define GetCommandByName(name) IAmosExtension->GetCommandByName((name)) 
+#define GetCommandByToken(token) IAmosExtension->GetCommandByToken((token)) 
 
 #endif /* INLINE4_AMOSEXTENSION_H */

@@ -38,7 +38,7 @@
   #define CLIB_AMOSEXTENSION_PROTOS_H 1
  #endif /* CLIB_AMOSEXTENSION_PROTOS_H */
  #ifndef __NOGLOBALIFACE__
-  extern struct amosextensionIFace *Iamosextension;
+  extern struct AmosExtensionIFace *IAmosExtension;
  #endif /* __NOGLOBALIFACE__ */
 #else /* __amigaos4__ */
  #ifndef CLIB_AMOSEXTENSION_PROTOS_H

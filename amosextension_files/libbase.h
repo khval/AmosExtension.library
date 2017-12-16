@@ -6,7 +6,9 @@ struct _Library
 
 	/* If you need more data fields, add them here */
 
-	struct Library			*DOSBase;
-	struct DOSIFace		*IDOS;
+	struct ExecIFace	*IExec;
+
+	struct Library		*DOSBase;
+	struct DOSIFace	*IDOS;
 };
 
