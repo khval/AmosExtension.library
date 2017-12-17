@@ -53,23 +53,26 @@ void dump_list(unsigned short *ptr , int cnt)
 	printf("\nSize %d\n\n",off);
 }
 
-void hex_dumpt(unsigned int *ptr)
+void dump_command_list(struct command *ptr , int cnt)
 {
-	int x = 0;
+	int n = 0;
 	unsigned int off = 0;
 
-	for(x=0;x<4;x++)
+	for(n=0;n<cnt;n++)
 	{
-		printf("%08x", *ptr *2 );
+		printf("%3d\t%08x\t%04X (%d)\n",n, off, ptr->func,(int) ptr->size );
+
+		off += ptr->size;
+		ptr++;
 	}
 
 	printf("\nSize %d\n\n",off);
 }
 
-
 int main()
 {
-	struct extension *ext;
+	struct extension *ext = NULL;
+	unsigned int name_off;
 
 	if (init())
 	{
@@ -90,14 +93,26 @@ int main()
 
 			printf("end %d\n", ext -> header -> end );
 
-//			ext -> sizeTable = (unsigned short *) ((char *) ext -> file + 0x20 + sizeof(struct extension) + 0x2 );
+//			ext -> sizeTable = (unsigned short *) ((char *) ext -> file + 0x20 + sizeof(struct fileHeader) + 0x2 );
 
-			dump_list( ext -> sizeTable, ext -> header->C_off_size / 2 );
+			dump_command_list( ext -> commands, ext -> header->C_off_size / 2 );
+
+//			dump_list( ext -> sizeTable, ext -> header->C_off_size / 2 );
 
 			printf("off size %08X - %d ---- %08x\n", 
 					ext -> header->C_off_size,
 					ext -> header->C_off_size,
 					((char *) ext -> header - (char *) ext -> file));
+
+			name_off = 0x20;
+			name_off += sizeof(struct fileHeader);
+			name_off += ext -> header-> C_off_size;
+			name_off += ext -> header-> C_tk_size;
+			name_off += ext -> header-> C_lib_size;
+
+			printf("\nname off %08X\n\n", name_off );
+
+			printf("name: %s\n", ext -> file + name_off );
 
 			CloseExtension(ext);
 		}
