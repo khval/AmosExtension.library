@@ -58,7 +58,9 @@ void _amosextension_CloseExtension(struct AmosExtensionIFace *Self,   struct ext
 
 	if (ext)
 	{
-		if (ext->file) libBase -> IExec -> FreeVec( ext -> file );
+		if (ext->file)			libBase -> IExec -> FreeVec( ext -> file );
+		if (ext->commands)	libBase -> IExec -> FreeVec( ext -> commands );
+
 		libBase -> IExec -> FreeVec( ext );
 	}
 }
