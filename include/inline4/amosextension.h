@@ -28,7 +28,8 @@
 /* Inline macros for Interface "main" */
 #define OpenExtension(name) IAmosExtension->OpenExtension((name)) 
 #define CloseExtension(extension) IAmosExtension->CloseExtension((extension)) 
-#define GetCommandByName(name) IAmosExtension->GetCommandByName((name)) 
-#define GetCommandByToken(token) IAmosExtension->GetCommandByToken((token)) 
+#define GetCommandByName(ext, name) IAmosExtension->GetCommandByName((ext), (name)) 
+#define GetCommandByToken(ext, token) IAmosExtension->GetCommandByToken((ext), (token)) 
+#define FreeTokenInfo(info) IAmosExtension->FreeTokenInfo((info)) 
 
 #endif /* INLINE4_AMOSEXTENSION_H */

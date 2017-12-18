@@ -13,6 +13,7 @@ STATIC CONST APTR main_v1_vectors[] =
     _amosextension_CloseExtension,
     _amosextension_GetCommandByName,
     _amosextension_GetCommandByToken,
+    _amosextension_FreeTokenInfo,
     (APTR)-1
 };
 

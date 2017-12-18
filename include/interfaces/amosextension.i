@@ -9,15 +9,16 @@
 #include <exec/exec.i>
 #include <exec/interfaces.i>
 
-STRUCTURE amosextensionIFace, InterfaceData_SIZE
-	    FPTR Iamosextension_Obtain
-	    FPTR Iamosextension_Release
-	    FPTR Iamosextension_Expunge
-	    FPTR Iamosextension_Clone
-	    FPTR Iamosextension_OpenExtension
-	    FPTR Iamosextension_CloseExtension
-	    FPTR Iamosextension_GetCommandByName
-	    FPTR Iamosextension_GetCommandByToken
-	LABEL amosextensionIFace_SIZE
+STRUCTURE AmosExtensionIFace, InterfaceData_SIZE
+	    FPTR IAmosExtension_Obtain
+	    FPTR IAmosExtension_Release
+	    FPTR IAmosExtension_Expunge
+	    FPTR IAmosExtension_Clone
+	    FPTR IAmosExtension_OpenExtension
+	    FPTR IAmosExtension_CloseExtension
+	    FPTR IAmosExtension_GetCommandByName
+	    FPTR IAmosExtension_GetCommandByToken
+	    FPTR IAmosExtension_FreeTokenInfo
+	LABEL AmosExtensionIFace_SIZE
 
 #endif

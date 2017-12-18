@@ -37,8 +37,9 @@ struct AmosExtensionIFace
 	struct Interface * APICALL (*Clone)(struct AmosExtensionIFace *Self);
 	struct extension * APICALL (*OpenExtension)(struct AmosExtensionIFace *Self, char * name);
 	void APICALL (*CloseExtension)(struct AmosExtensionIFace *Self, struct extension * extension);
-	unsigned int APICALL (*GetCommandByName)(struct AmosExtensionIFace *Self, char * name);
-	unsigned int APICALL (*GetCommandByToken)(struct AmosExtensionIFace *Self, unsigned short token);
+	struct TokenInfo * APICALL (*GetCommandByName)(struct AmosExtensionIFace *Self, struct extension * ext, char * name);
+	struct TokenInfo * APICALL (*GetCommandByToken)(struct AmosExtensionIFace *Self, struct extension * ext, unsigned short token);
+	void APICALL (*FreeTokenInfo)(struct AmosExtensionIFace *Self, struct TokenInfo * info);
 };
 
 #ifdef __cplusplus
