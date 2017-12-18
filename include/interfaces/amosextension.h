@@ -40,6 +40,7 @@ struct AmosExtensionIFace
 	struct TokenInfo * APICALL (*GetCommandByName)(struct AmosExtensionIFace *Self, struct extension * ext, char * name);
 	struct TokenInfo * APICALL (*GetCommandByToken)(struct AmosExtensionIFace *Self, struct extension * ext, unsigned short token);
 	void APICALL (*FreeTokenInfo)(struct AmosExtensionIFace *Self, struct TokenInfo * info);
+	char * APICALL (*GetExtensionName)(struct AmosExtensionIFace *Self, struct extension * ext);
 };
 
 #ifdef __cplusplus

@@ -31,5 +31,6 @@
 #define GetCommandByName(ext, name) IAmosExtension->GetCommandByName((ext), (name)) 
 #define GetCommandByToken(ext, token) IAmosExtension->GetCommandByToken((ext), (token)) 
 #define FreeTokenInfo(info) IAmosExtension->FreeTokenInfo((info)) 
+#define GetExtensionName(ext) IAmosExtension->GetExtensionName((ext)) 
 
 #endif /* INLINE4_AMOSEXTENSION_H */

@@ -19,6 +19,7 @@ STRUCTURE AmosExtensionIFace, InterfaceData_SIZE
 	    FPTR IAmosExtension_GetCommandByName
 	    FPTR IAmosExtension_GetCommandByToken
 	    FPTR IAmosExtension_FreeTokenInfo
+	    FPTR IAmosExtension_GetExtensionName
 	LABEL AmosExtensionIFace_SIZE
 
 #endif

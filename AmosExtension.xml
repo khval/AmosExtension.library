@@ -25,6 +25,9 @@
 		<method name="FreeTokenInfo" result="void">
 			<arg name="info" type="struct TokenInfo *"/>
 		</method>
+		<method name="GetExtensionName" result="char *">
+			<arg name="ext" type="struct extension *"/>
+		</method>
 	</interface>
 </library>
 
