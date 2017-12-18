@@ -166,8 +166,8 @@ void token_reader( struct extension *ext, struct fileHeader &FH )
 int main()
 {
 	struct extension *ext = NULL;
-	unsigned int name_off;
 	TokenInfo *info;
+	char *name;
 
 	if (init())
 	{
@@ -199,19 +199,7 @@ int main()
 					ext -> header->C_off_size,
 					((char *) ext -> header - (char *) ext -> file));
 
-
 			token_reader( ext, *ext -> header );
-
-
-			name_off = 0x20;
-			name_off += sizeof(struct fileHeader);
-			name_off += ext -> header-> C_off_size;
-			name_off += ext -> header-> C_tk_size;
-			name_off += ext -> header-> C_lib_size;
-
-			printf("\nname off %08X\n\n", name_off );
-
-			printf("name: %s\n", ext -> file + name_off );
 
 			info = GetCommandByToken( ext, 0x0002 );
 			if (info)
@@ -232,6 +220,13 @@ int main()
 			{
 				printf("command %s\nargs %s\n", info -> command, info -> args);
 				FreeTokenInfo(info);
+			}
+
+			name = GetExtensionName( ext );
+			if (name)
+			{
+				printf("\nname: %s\n\n", name );
+				FreeVec( name );
 			}
 
 			CloseExtension(ext);
