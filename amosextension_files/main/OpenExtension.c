@@ -56,7 +56,7 @@
 void init_command_list( struct extension *ext , int commands )
 {
 	int n = 0;
-	unsigned int off = 0x20;
+	unsigned int off = 0x20 + sizeof(struct fileHeader);
 
 	off += ext -> header -> C_off_size;
 	off += ext -> header -> C_tk_size;
