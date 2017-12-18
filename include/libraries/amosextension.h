@@ -24,3 +24,11 @@ struct extension
 	struct command *commands;
 };
 
+struct TokenInfo
+{
+	unsigned short token;
+	short NumberOfInstruction;
+	short NumberOfFunction;
+	char *command;
+	char *args;
+};
