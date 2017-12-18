@@ -60,7 +60,7 @@ static void local_memcpy(char *dest, char *src, int size )
 	for (n=0;n<size;n++) { dest[n] = src[n]; }
 }
 
-static char *local_strdup( struct ExecIFace *IExec, char *str ) 
+char *local_strdup( struct ExecIFace *IExec, char *str ) 
 {
 	char *ret;
 	int _len_ = 0;
