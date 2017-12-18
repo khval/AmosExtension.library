@@ -3,7 +3,7 @@
 <library name="amosextension" basename="amosExtensionBase" openname="amosextension.library">
 	<include>exec/types.h</include>
 	<include>libraries/amosextension.h</include>
-	<interface name="main" version="1.0" struct="amosextensionIFace" prefix="_amosextension_" asmprefix="IAmosExtension" global="IAmosExtension">
+	<interface name="main" version="1.0" struct="AmosExtensionIFace" prefix="_amosextension_" asmprefix="IAmosExtension" global="IAmosExtension">
 		<method name="Obtain" result="ULONG"/>
 		<method name="Release" result="ULONG"/>
 		<method name="Expunge" result="void" status="unimplemented"/>
@@ -14,11 +14,16 @@
 		<method name="CloseExtension" result="void">
 			<arg name="extension" type="struct extension *"/>
 		</method>
-		<method name="GetCommandByName" result="unsigned int">
+		<method name="GetCommandByName" result="struct TokenInfo *">
+			<arg name="ext" type="struct extension *"/>
 			<arg name="name" type="char *"/>
 		</method>
-		<method name="GetCommandByToken" result="unsigned int">
+		<method name="GetCommandByToken" result="struct TokenInfo *">
+			<arg name="ext" type="struct extension *"/>
 			<arg name="token" type="unsigned short"/>
+		</method>
+		<method name="FreeTokenInfo" result="void">
+			<arg name="info" type="struct TokenInfo *"/>
 		</method>
 	</interface>
 </library>
