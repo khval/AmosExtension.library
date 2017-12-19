@@ -21,6 +21,7 @@
 #include <libraries/amosextension.h>
 #include <proto/amosextension.h>
 #include <stdarg.h>
+#include <string.h>
 
 #include "../libbase.h"
 
@@ -52,12 +53,9 @@
 *
 */
 
-extern char *local_strdup( struct ExecIFace *IExec, char *str ) ;
-
 char * _amosextension_GetExtensionName(struct AmosExtensionIFace *Self,
        struct extension * ext)
 {
-	struct _Library *libBase = (struct _Library *) Self -> Data.LibBase;
 	unsigned int name_off;
 	char *ret;
 
@@ -67,7 +65,7 @@ char * _amosextension_GetExtensionName(struct AmosExtensionIFace *Self,
 	name_off += ext -> header-> C_tk_size;
 	name_off += ext -> header-> C_lib_size;
 
-	ret = local_strdup( libBase -> IExec, ext -> file + name_off );
+	ret = strdup( ext -> file + name_off );
 	return ret;
 }
 

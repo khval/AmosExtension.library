@@ -32,3 +32,9 @@ struct TokenInfo
 	char *command;
 	char *args;
 };
+
+#define sread( dest, usize, n )		\
+	{							\
+		memcpy( (char *) (dest), ext -> file + _file_offset_, usize *n );	\
+		_file_offset_ += (usize * n);								\
+	}

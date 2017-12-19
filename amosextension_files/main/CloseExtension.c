@@ -21,6 +21,7 @@
 #include <libraries/amosextension.h>
 #include <proto/amosextension.h>
 #include <stdarg.h>
+#include <stdlib.h>
 
 #include "../libbase.h"
 
@@ -58,8 +59,8 @@ void _amosextension_CloseExtension(struct AmosExtensionIFace *Self,   struct ext
 
 	if (ext)
 	{
-		if (ext->file)			libBase -> IExec -> FreeVec( ext -> file );
-		if (ext->commands)	libBase -> IExec -> FreeVec( ext -> commands );
+		if (ext->file)			free( ext -> file );
+		if (ext->commands)	free( ext -> commands );
 
 		libBase -> IExec -> FreeVec( ext );
 	}

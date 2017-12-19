@@ -27,7 +27,7 @@ LINK =
 TARGET = amosextension.library
 
 # Additional linker libraries
-LIBS = 
+LIBS = -mcrt=clib2
 
 # Version of the library to build
 VERSION = 53

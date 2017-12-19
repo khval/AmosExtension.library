@@ -21,6 +21,7 @@
 #include <libraries/amosextension.h>
 #include <proto/amosextension.h>
 #include <stdarg.h>
+#include <string.h>
 
 #include "../libbase.h"
 
@@ -54,39 +55,9 @@
 */
 
 
-static void local_memcpy(char *dest, char *src, int size )
-{
-	int n;
-	for (n=0;n<size;n++) { dest[n] = src[n]; }
-}
-
-char *local_strdup( struct ExecIFace *IExec, char *str ) 
-{
-	char *ret;
-	int _len_ = 0;
-	char *p;
-	char *d;
-	for (p=str; *p; p++) _len_++;
-
-	if (_len_>0)
-	{
-		ret = (char *) IExec->AllocVecTags( _len_ + 1 , AVT_Type, MEMF_SHARED, AVT_ClearWithValue, 0 , TAG_END );
-		d = ret;
-		for (p=str; *p; p++) *d++= *p;
-		*d =0;
-	}
-	else
-	{
-		ret = NULL;
-	}
-
-	return ret;
-}
-
-
 #define sread( dest, usize, n )		\
 	{							\
-		local_memcpy( (char *) (dest), ext -> file + _file_offset_, usize *n );	\
+		memcpy( (char *) (dest), ext -> file + _file_offset_, usize *n );	\
 		_file_offset_ += (usize * n);								\
 	}
 
@@ -144,8 +115,8 @@ struct TokenInfo * _amosextension_GetCommandByToken(struct AmosExtensionIFace *S
 	command[ c_count ] = 0;
 	arg[ a_count ] = 0;
 
-	info -> command = c_count ? local_strdup( libBase->IExec, command) : NULL;
-	info -> args = a_count ? local_strdup( libBase->IExec, arg) : NULL;
+	info -> command = c_count ? strdup( command) : NULL;
+	info -> args = a_count ? strdup( arg) : NULL;
 
 	return info;
 }
