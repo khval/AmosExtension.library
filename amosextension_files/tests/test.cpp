@@ -78,91 +78,6 @@ void dump_command_list(struct command *ptr , int cnt)
 	printf("\nSize %d\n\n",off);
 }
 
-#define sread( dest, usize, n )		\
-	{							\
-		memcpy( dest, ext -> file + _file_offset_, usize *n );	\
-		_file_offset_ += (usize * n);								\
-	}
-
-void token_reader( struct extension *ext, struct fileHeader &FH )
-{
-	struct tokenDefine cmd;
-	bool is_command;
-	short NumberOfInstruction;
-	short NumberOfFunction;
-	int a_count;
-	int c_count;
-	signed char c;
-	char comment[1000];
-	const char *ret;
-	char *ptr;
-	char *aptr;
-	bool rv;
-
-	int _file_offset_ = FH.C_off_size + sizeof(struct fileHeader) + 0x20;
-
-	memset( cmd.command, 0, 256 );
-	memset( cmd.arg, 0 , 256 );
-
-		cmd.token = (_file_offset_ - 0x20) - FH.C_off_size - 0x16;
-
-		sread(&NumberOfInstruction, sizeof(NumberOfInstruction), 1);
-
-		while ((NumberOfInstruction != 0))
-		{
-
-			sread(&NumberOfFunction, sizeof(NumberOfFunction), 1);
-			sread( &c,1,1);
-
-			c_count = 0;
-			a_count = 0;
-
-			is_command = TRUE;	// we expect command.
-			while ((c != -1) && (c != -2))
-			{
-				if ( (c & 127) > 0)
-				{
-					if (is_command)
-					{
-						if (c_count<255) cmd.command[ c_count++ ] = c & 127;
-					}
-					else
-					{
-						if (a_count<255) cmd.arg[ a_count++ ] = c & 127;
-					}
-				}
-
-				if (c & 128)
-				{
-					 is_command = FALSE;
-				}
-
-				sread( &c,1,1);
-			}
-
-			// terminate string only if we have new command.
-			if (c_count>0) 
-			{
-				int n = strlen( cmd.command );
-				cmd.command[ c_count ] = 0;	// terminate string.
-
-				while ((n>0) && (cmd.command[n-1]==' '))
-				{
-					cmd.command[n-1]=0;
-					n--;
-				}
-			}
-			cmd.arg[ a_count ] = 0;
-
-			printf("%3d: { 0x%04X,%c%s%c }\n",_file_offset_, cmd.token, 34, cmd.command[0]=='!' ? cmd.command+1 : cmd.command, 34);
-
-			if ( _file_offset_ & 1 )  sread( &c,1,1);
-			cmd.token = (_file_offset_ - 0x20) - FH.C_off_size - 0x16;
-
-			sread(&NumberOfInstruction, sizeof(NumberOfInstruction), 1);
-		}
-}
-
 int main()
 {
 	struct extension *ext = NULL;
@@ -199,7 +114,16 @@ int main()
 					ext -> header->C_off_size,
 					((char *) ext -> header - (char *) ext -> file));
 
-			token_reader( ext, *ext -> header );
+			printf("\n-- GetCommandByName --\n\n");
+
+			info = GetCommandByName( ext, (char *) "request on" );
+			if (info)
+			{
+				printf("command %s\nargs %s\n", info -> command, info -> args);
+				FreeTokenInfo(info);
+			}
+
+			printf("\n-- GetCommandByToken --\n\n");
 
 			info = GetCommandByToken( ext, 0x0002 );
 			if (info)
@@ -226,7 +150,7 @@ int main()
 			if (name)
 			{
 				printf("\nname: %s\n\n", name );
-				FreeVec( name );
+				free( name );
 			}
 
 			CloseExtension(ext);
