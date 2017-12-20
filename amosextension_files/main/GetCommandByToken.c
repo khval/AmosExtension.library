@@ -54,13 +54,6 @@
 *
 */
 
-
-#define sread( dest, usize, n )		\
-	{							\
-		memcpy( (char *) (dest), ext -> file + _file_offset_, usize *n );	\
-		_file_offset_ += (usize * n);								\
-	}
-
 struct TokenInfo * _amosextension_GetCommandByToken(struct AmosExtensionIFace *Self,
 	struct extension *ext, unsigned short token)
 {
