@@ -10,5 +10,15 @@ struct _Library
 
 	struct Library		*DOSBase;
 	struct DOSIFace	*IDOS;
+
+	struct Library		*NewLibBase;
+	struct Interface	*INewlib;
+
 };
+
+#define sread( dest, usize, n )		\
+	{							\
+		memcpy( (char *) (dest), ext -> file + _file_offset_, usize *n );	\
+		_file_offset_ += (usize * n);								\
+	}
 
