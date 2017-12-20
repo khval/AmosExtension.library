@@ -29,8 +29,6 @@ TARGET = amosextension.library
 # Additional linker libraries
 LIBS = 
 
-#-mcrt=clib2 #-- can't use this, some lib not open or something.
-
 # Version of the library to build
 VERSION = 53
 
@@ -38,8 +36,6 @@ VERSION = 53
 main_SRCS = main/Obtain.c main/Release.c main/OpenExtension.c \
     main/CloseExtension.c main/GetCommandByName.c main/GetCommandByToken.c \
     main/FreeTokenInfo.c main/GetExtensionName.c 
-
-main_SRCS += local.c
 
 # -------------------------------------------------------------
 # Nothing should need changing below this line
