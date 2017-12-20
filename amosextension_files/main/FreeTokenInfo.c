@@ -21,6 +21,7 @@
 #include <libraries/amosextension.h>
 #include <proto/amosextension.h>
 #include <stdarg.h>
+#include <string.h>
 
 #include "../libbase.h"
 
@@ -57,8 +58,8 @@ void _amosextension_FreeTokenInfo(struct AmosExtensionIFace *Self,
 {
 	struct _Library *libBase = (struct _Library *) Self -> Data.LibBase;
 
-	if (info -> command) libBase->IExec->FreeVec( info -> command );
-	if (info -> args)  libBase->IExec->FreeVec( info -> args );
+	if (info -> command) free( info -> command );
+	if (info -> args)  free( info -> args );
  	libBase->IExec->FreeVec( info );
 }
 
