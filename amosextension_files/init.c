@@ -28,6 +28,8 @@ STATIC CONST UBYTE USED verstag[] = VERSTAG;
 
 #include "libbase.h"
 
+struct Interface *INewlib = NULL;
+
 /*
  * The system (and compiler) rely on a symbol named _start which marks
  * the beginning of execution of an ELF file. To prevent others from 
@@ -104,6 +106,13 @@ STATIC APTR libExpunge(struct LibraryManagerInterface *Self)
 
 		libBase->IDOS = NULL;
 		libBase->DOSBase = NULL;
+
+		if (libBase->INewlib) IExec->DropInterface( (struct Interface *) libBase->INewlib);
+		if (libBase->NewLibBase) IExec->CloseLibrary( libBase->NewLibBase );
+
+		libBase->INewlib = NULL;
+		libBase->NewLibBase = NULL;
+
     }
     else
     {
@@ -140,6 +149,16 @@ STATIC struct Library *libInit(struct _Library *LibraryBase, APTR seglist, struc
 		libBase->IDOS = (struct DOSIFace *)IExec->GetInterface(libBase->DOSBase,"main", 1, NULL);
 
 		if (!libBase->IDOS) return NULL;
+	} else return NULL; 
+
+	libBase->NewLibBase = IExec->OpenLibrary("newlib.library", 53L);
+	if (libBase->NewLibBase)
+	{
+		libBase->INewlib = (struct Interface *)IExec->GetInterface(libBase->NewLibBase,"main", 1, NULL);
+
+		INewlib = libBase -> INewlib;
+
+		if (!libBase->INewlib) return NULL;
 	} else return NULL; 
 
        return (struct Library *)libBase;
