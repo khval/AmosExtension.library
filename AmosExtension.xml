@@ -28,6 +28,15 @@
 		<method name="GetExtensionName" result="char *">
 			<arg name="ext" type="struct extension *"/>
 		</method>
+		<method name="FirstExtension" result="struct ExtensionDescriptor *">
+			<arg name="ext" type="struct extension *"/>
+		</method>
+		<method name="NextExtension" result="struct ExtensionDescriptor *">
+			<arg name="extension_descriptor" type="struct ExtensionDescriptor *"/>
+		</method>
+		<method name="CloseExtensionDescriptor" result="void">
+			<arg name="extension_descriptor" type="struct ExtensionDescriptor *"/>
+		</method>	
 	</interface>
 </library>
 

@@ -1,5 +1,5 @@
 /* :ts=4
- *  $VER: FreeTokenInfo.c $Revision$ (18-Dec-2017)
+ *  $VER: CloseExtensionDescriptor.c $Revision$ (20-Dec-2017)
  *
  *  This file is part of amosextension.
  *
@@ -21,22 +21,20 @@
 #include <libraries/amosextension.h>
 #include <proto/amosextension.h>
 #include <stdarg.h>
-#include <stdlib.h>
 
-#include "../libbase.h"
-
-/****** amosextension/main/FreeTokenInfo ******************************************
+/****** amosextension/main/CloseExtensionDescriptor ******************************************
 *
 *   NAME
-*      FreeTokenInfo -- Description
+*      CloseExtensionDescriptor -- Description
 *
 *   SYNOPSIS
-*      void FreeTokenInfo(struct TokenInfo * info);
+*      void CloseExtensionDescriptor(
+*          struct ExtensionDescriptor * extension_descriptor);
 *
 *   FUNCTION
 *
 *   INPUTS
-*       info - 
+*       extension_descriptor - 
 *
 *   RESULT
 *       This function does not return a result
@@ -53,13 +51,10 @@
 *
 */
 
-void _amosextension_FreeTokenInfo(struct AmosExtensionIFace *Self,
-       struct TokenInfo * info)
+void _amosextension_CloseExtensionDescriptor(struct AmosExtensionIFace *Self,
+       struct ExtensionDescriptor * extension_descriptor)
 {
-	struct _Library *libBase = (struct _Library *) Self -> Data.LibBase;
+	if (extension_descriptor == NULL)  return;		// can be freed by NextExtension
 
-	if (info -> command) free( info -> command );
-	if (info -> args)  free( info -> args );
- 	libBase->IExec->FreeVec( info );
 }
 

@@ -17,6 +17,7 @@
 #include <exec/exec.h>
 #include <proto/exec.h>
 #include <dos/dos.h>
+#include <proto/dos.h>
 #include <exec/types.h>
 #include <libraries/amosextension.h>
 #include <proto/amosextension.h>
@@ -73,13 +74,14 @@ struct TokenInfo *_amosextension_GetCommandByName(struct AmosExtensionIFace *Sel
 	int c_count;
 	signed char c;
 	struct TokenInfo *info = NULL;
-
 	int _file_offset_ = ext -> header -> C_off_size + sizeof(struct fileHeader) + 0x20;
 
 	memset( cmd.command, 0, 256 );
 	memset( cmd.arg, 0 , 256 );
 
 	cmd.token = (_file_offset_ - 0x20) -  ext -> header -> C_off_size - 0x16;
+
+	libBase -> IDOS -> Printf("%s:%ld\n",__FUNCTION__,__LINE__);
 
 	sread(&NumberOfInstruction, sizeof(NumberOfInstruction), 1);
 
@@ -146,7 +148,6 @@ struct TokenInfo *_amosextension_GetCommandByName(struct AmosExtensionIFace *Sel
 
 		if ( _file_offset_ & 1 )  sread( &c,1,1);
 		cmd.token = (_file_offset_ - 0x20) -  ext -> header -> C_off_size - 0x16;
-
 		sread(&NumberOfInstruction, sizeof(NumberOfInstruction), 1);
 	}
 

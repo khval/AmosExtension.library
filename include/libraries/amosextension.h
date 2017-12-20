@@ -33,3 +33,9 @@ struct TokenInfo
 	char *args;
 };
 
+struct ExtensionDescriptor
+{
+	unsigned int fileOffset;
+	struct TokenInfo	*tokenInfo;
+};
+
