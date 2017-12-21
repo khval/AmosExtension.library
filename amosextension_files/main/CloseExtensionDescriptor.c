@@ -21,6 +21,8 @@
 #include <libraries/amosextension.h>
 #include <proto/amosextension.h>
 #include <stdarg.h>
+#include <stdlib.h>
+#include "../libbase.h"
 
 /****** amosextension/main/CloseExtensionDescriptor ******************************************
 *
@@ -54,7 +56,12 @@
 void _amosextension_CloseExtensionDescriptor(struct AmosExtensionIFace *Self,
        struct ExtensionDescriptor * extension_descriptor)
 {
+	struct _Library *libBase = (struct _Library *) Self -> Data.LibBase;
+
 	if (extension_descriptor == NULL)  return;		// can be freed by NextExtension
 
+	if (extension_descriptor -> tokenInfo.command) free( extension_descriptor -> tokenInfo.command );
+	if (extension_descriptor -> tokenInfo.args) free( extension_descriptor -> tokenInfo.args );
+	libBase -> IExec -> FreeVec(extension_descriptor);
 }
 
