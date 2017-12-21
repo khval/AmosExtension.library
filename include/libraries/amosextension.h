@@ -36,6 +36,7 @@ struct TokenInfo
 struct ExtensionDescriptor
 {
 	unsigned int fileOffset;
-	struct TokenInfo	*tokenInfo;
+	struct extension	*ext;
+	struct TokenInfo	tokenInfo;
 };
 
