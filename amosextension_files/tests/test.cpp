@@ -4,9 +4,7 @@
 #include <proto/exec.h>
 #include <proto/AmosExtension.h>
 #include <string.h>
-
-struct Library 				 *AmosExtensionBase = NULL;
-struct AmosExtensionIFace	 *IAmosExtension = NULL;
+#include "init.h"
 
 struct tokenDefine 
 {
@@ -14,37 +12,6 @@ struct tokenDefine
 	char command[256];
 	char arg[256];
 };
-
-
-BOOL open_lib( const char *name, int ver , const char *iname, int iver, struct Library **base, struct Interface **interface)
-{
-	*interface = NULL;
-	*base = OpenLibrary( name , ver);
-	if (*base)
-	{
-		 *interface = GetInterface( *base,  iname , iver, TAG_END );
-		if (!*interface) printf("Unable to getInterface %s for %s %ld!\n",iname,name,ver);
-	}
-	else
-	{
-	   	printf("Unable to open the %s %ld!\n",name,ver);
-	}
-	return (*interface) ? TRUE : FALSE;
-}
-
-
-bool init()
-{
-	if ( ! open_lib( "amosextension.library", 1L , "main", 1, &AmosExtensionBase, (struct Interface **) &IAmosExtension  ) ) return FALSE;
-
-	return TRUE;
-}
-
-void closedown()
-{
-	if (IAmosExtension) DropInterface((struct Interface*) IAmosExtension); IAmosExtension = 0;
-	if (AmosExtensionBase) CloseLibrary(AmosExtensionBase); AmosExtensionBase = 0;
-}
 
 void dump_list(unsigned short *ptr , int cnt)
 {
