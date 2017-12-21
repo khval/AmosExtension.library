@@ -35,8 +35,8 @@ VERSION = 53
 # "main" Interface Source Files
 main_SRCS = main/Obtain.c main/Release.c main/OpenExtension.c \
     main/CloseExtension.c main/GetCommandByName.c main/GetCommandByToken.c \
-    main/FreeTokenInfo.c main/GetExtensionName.c main/FirstExtension.c \
-    main/NextExtension.c main/CloseExtensionDescriptor.c 
+    main/FreeTokenInfo.c main/GetExtensionName.c main/FirstExtensionItem.c \
+    main/NextExtensionItem.c main/CloseExtensionDescriptor.c 
 
 # -------------------------------------------------------------
 # Nothing should need changing below this line

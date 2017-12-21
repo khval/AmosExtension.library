@@ -32,7 +32,7 @@
 *      NextExtension -- Description
 *
 *   SYNOPSIS
-*      struct ExtensionDescriptor * NextExtension(
+*      struct ExtensionDescriptor * NextExtensionItem(
 *          struct ExtensionDescriptor * extension_descriptor);
 *
 *   FUNCTION
@@ -58,7 +58,7 @@
 #define _file_offset_	ret->fileOffset
 #define ext			ret->ext
 
-struct ExtensionDescriptor * _amosextension_NextExtension(struct AmosExtensionIFace *Self,
+struct ExtensionDescriptor * _amosextension_NextExtensionItem(struct AmosExtensionIFace *Self,
        struct ExtensionDescriptor * extension_descriptor)
 {
 	struct _Library *libBase = (struct _Library *) Self -> Data.LibBase;

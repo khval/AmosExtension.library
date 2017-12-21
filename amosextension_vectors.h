@@ -23,6 +23,6 @@ extern struct TokenInfo *   VARARGS68K _amosextension_GetCommandByName(struct Am
 extern struct TokenInfo *   VARARGS68K _amosextension_GetCommandByToken(struct AmosExtensionIFace *, struct extension * ext, unsigned short token);
 extern void                 VARARGS68K _amosextension_FreeTokenInfo(struct AmosExtensionIFace *, struct TokenInfo * info);
 extern char *               VARARGS68K _amosextension_GetExtensionName(struct AmosExtensionIFace *, struct extension * ext);
-extern struct ExtensionDescriptor * VARARGS68K _amosextension_FirstExtension(struct AmosExtensionIFace *, struct extension * ext);
-extern struct ExtensionDescriptor * VARARGS68K _amosextension_NextExtension(struct AmosExtensionIFace *, struct ExtensionDescriptor * extension_descriptor);
+extern struct ExtensionDescriptor * VARARGS68K _amosextension_FirstExtensionItem(struct AmosExtensionIFace *, struct extension * ext);
+extern struct ExtensionDescriptor * VARARGS68K _amosextension_NextExtensionItem(struct AmosExtensionIFace *, struct ExtensionDescriptor * extension_descriptor);
 extern void                 VARARGS68K _amosextension_CloseExtensionDescriptor(struct AmosExtensionIFace *, struct ExtensionDescriptor * extension_descriptor);

@@ -30,7 +30,7 @@
 *      FirstExtension -- Description
 *
 *   SYNOPSIS
-*      struct ExtensionDescriptor * FirstExtension(struct extension * ext);
+*      struct ExtensionDescriptor * FirstExtensionItem(struct extension * ext);
 *
 *   FUNCTION
 *
@@ -61,7 +61,7 @@ struct tokenDefine
 
 #define _file_offset_ ret->fileOffset
 
-struct ExtensionDescriptor * _amosextension_FirstExtension(struct AmosExtensionIFace *Self,
+struct ExtensionDescriptor * _amosextension_FirstExtensionItem(struct AmosExtensionIFace *Self,
        struct extension * ext)
 {
 	struct _Library *libBase = (struct _Library *) Self -> Data.LibBase;

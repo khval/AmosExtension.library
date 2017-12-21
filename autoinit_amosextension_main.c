@@ -16,9 +16,9 @@
 #include <proto/exec.h>
 #include <assert.h>
 
-struct amosextensionIFace * Iamosextension = NULL;
+struct AmosExtensionIFace * IAmosExtension = NULL;
 static struct Library * __amosExtensionBase;
-static struct amosextensionIFace * __Iamosextension;
+static struct AmosExtensionIFace * __IAmosExtension;
 
 /****************************************************************************/
 
@@ -39,8 +39,8 @@ void amosextension_main_constructor(void)
         assert(amosExtensionBase != NULL);
     }
 
-    __Iamosextension = Iamosextension = (struct amosextensionIFace *)IExec->GetInterface((struct Library *)amosExtensionBase, "main", 1, NULL);
-    assert(Iamosextension != NULL);
+    __IAmosExtension = IAmosExtension = (struct AmosExtensionIFace *)IExec->GetInterface((struct Library *)amosExtensionBase, "main", 1, NULL);
+    assert(IAmosExtension != NULL);
 }
 __attribute__((section(".ctors.zzzy"))) static void
 (*amosextension_main_constructor_ptr)(void) USED = amosextension_main_constructor;
@@ -49,9 +49,9 @@ __attribute__((section(".ctors.zzzy"))) static void
 
 void amosextension_main_destructor(void)
 {
-    if (__Iamosextension)
+    if (__IAmosExtension)
     {
-        IExec->DropInterface ((struct Interface *)__Iamosextension);
+        IExec->DropInterface ((struct Interface *)__IAmosExtension);
     }
     if (__amosExtensionBase)
     {

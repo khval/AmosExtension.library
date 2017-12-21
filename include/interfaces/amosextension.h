@@ -41,8 +41,8 @@ struct AmosExtensionIFace
 	struct TokenInfo * APICALL (*GetCommandByToken)(struct AmosExtensionIFace *Self, struct extension * ext, unsigned short token);
 	void APICALL (*FreeTokenInfo)(struct AmosExtensionIFace *Self, struct TokenInfo * info);
 	char * APICALL (*GetExtensionName)(struct AmosExtensionIFace *Self, struct extension * ext);
-	struct ExtensionDescriptor * APICALL (*FirstExtension)(struct AmosExtensionIFace *Self, struct extension * ext);
-	struct ExtensionDescriptor * APICALL (*NextExtension)(struct AmosExtensionIFace *Self, struct ExtensionDescriptor * extension_descriptor);
+	struct ExtensionDescriptor * APICALL (*FirstExtensionItem)(struct AmosExtensionIFace *Self, struct extension * ext);
+	struct ExtensionDescriptor * APICALL (*NextExtensionItem)(struct AmosExtensionIFace *Self, struct ExtensionDescriptor * extension_descriptor);
 	void APICALL (*CloseExtensionDescriptor)(struct AmosExtensionIFace *Self, struct ExtensionDescriptor * extension_descriptor);
 };
 
