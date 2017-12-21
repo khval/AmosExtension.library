@@ -52,7 +52,9 @@ $(TARGET): $(OBJS)
 clean:
 	$(RM) $(TARGET) $(OBJS)
 
-.PHONY: revision
+.PHONY: revision autodoc
 revision:
 	bumprev $(VERSION) $(TARGET)
 
+autodoc:
+	autodoc -l100 $(main_SRCS) > $(TARGET:.library=.doc)

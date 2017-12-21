@@ -1,0 +1,294 @@
+TABLE OF CONTENTS
+
+amosextension/main/CloseExtension
+amosextension/main/CloseExtensionDescriptor
+amosextension/main/FirstExtension
+amosextension/main/FreeTokenInfo
+amosextension/main/GetCommandByName
+amosextension/main/GetCommandByToken
+amosextension/main/GetExtensionName
+amosextension/main/NextExtension
+amosextension/main/Obtain
+amosextension/main/OpenExtension
+amosextension/main/Release
+
+
+amosextension/main/CloseExtension                                 amosextension/main/CloseExtension
+
+   NAME
+      CloseExtension -- Description
+
+   SYNOPSIS
+      void CloseExtension(struct extension * extension);
+
+   FUNCTION
+		Close AMOS Extension file
+
+   INPUTS
+       extension - Pointer to AMOS extension to close
+
+   EXAMPLE
+
+   NOTES
+
+   BUGS
+
+   SEE ALSO
+
+amosextension/main/CloseExtensionDescriptor             amosextension/main/CloseExtensionDescriptor
+
+   NAME
+      CloseExtensionDescriptor -- Description
+
+   SYNOPSIS
+      void CloseExtensionDescriptor(
+          struct ExtensionDescriptor * extension_descriptor);
+
+   FUNCTION
+		This command should be used if extension_descriptor
+		is not NULL, for example if you exit the loop early.
+
+   INPUTS
+       extension_descriptor - Kind a like file descriptor, 
+				but is used keep track of where in extension we are.
+
+   RESULT
+       This function does not return a result
+
+   EXAMPLE
+
+		for ( ed = FirstExtensionItem( ext ); ed ; ed = NextExtensionItem( ed ))
+		{
+			if (strcmp( ed -> tokenInfo.command, "find command")==0)
+			{
+				CloseExtensionDescriptor(ed);	// clean up before exit loop
+				ed = NULL;
+				break;
+			}
+		}
+
+
+   NOTES
+
+   BUGS
+
+   SEE ALSO
+
+amosextension/main/FirstExtension                                 amosextension/main/FirstExtension
+
+   NAME
+      FirstExtension -- Description
+
+   SYNOPSIS
+      struct ExtensionDescriptor * FirstExtensionItem(struct extension * ext);
+
+   FUNCTION
+		Find first AMOS command in Extension.
+
+   INPUTS
+       ext - extension struct, obtained by OpenExtension()
+
+   RESULT
+       The result ...
+	
+		struct ExtensionDescriptor
+		{
+			unsigned int fileOffset;			// Offset in file, in memory
+			struct extension	*ext;			// We keep pointer to extension
+			struct TokenInfo	tokenInfo;		// Where store info about the AMOS command
+		};
+	
+
+   EXAMPLE
+
+		for ( ed = FirstExtensionItem( ext ); ed ; ed = NextExtensionItem( ed ))
+		{
+		}
+
+   NOTES
+
+   BUGS
+
+   SEE ALSO
+
+amosextension/main/FreeTokenInfo                                   amosextension/main/FreeTokenInfo
+
+   NAME
+      FreeTokenInfo -- Description
+
+   SYNOPSIS
+      void FreeTokenInfo(struct TokenInfo * info);
+
+   FUNCTION
+
+   INPUTS
+       info - 
+
+   RESULT
+       This function does not return a result
+
+   EXAMPLE
+
+   NOTES
+
+   BUGS
+
+   SEE ALSO
+
+amosextension/main/GetCommandByName                             amosextension/main/GetCommandByName
+
+   NAME
+      GetCommandByName -- Description
+
+   SYNOPSIS
+      struct TokenInfo *GetCommandByName( struct extension *ext, char * name );
+
+   FUNCTION
+
+   INPUTS
+       ext -
+       name - 
+
+   RESULT
+       The result ...
+
+   EXAMPLE
+
+   NOTES
+
+   BUGS
+
+   SEE ALSO
+
+amosextension/main/GetCommandByToken                           amosextension/main/GetCommandByToken
+
+   NAME
+      GetCommandByToken -- Description
+
+   SYNOPSIS
+      struct TokenInfo * GetCommandByToken(struct extension *ext,unsigned short token);
+
+   FUNCTION
+
+   INPUTS
+       ext - Amos extension, to read from.
+       token - token number to find.
+
+   RESULT
+       The result ...
+
+		struct TokenInfo
+		{
+			unsigned short token;		# token number, should be the same one argument
+			short NumberOfInstruction;	# index value to be used in command table
+			short NumberOfFunction;		# I'm not shore about this one
+			char *command;				# Name of AMOS command
+			char *args;					# Argument of AMOS command (in AMOS format) 
+		};
+
+
+   EXAMPLE
+
+   NOTES
+
+   BUGS
+
+   SEE ALSO
+
+amosextension/main/GetExtensionName                             amosextension/main/GetExtensionName
+
+   NAME
+      GetExtensionName -- Description
+
+   SYNOPSIS
+      char * GetExtensionName(struct TokenInfo * ext);
+
+   FUNCTION
+
+   INPUTS
+       ext - extension struct, obtained by OpenExtension()
+
+   RESULT
+       The result name of Extension, use free() to free memory.
+
+   EXAMPLE
+
+   NOTES
+
+   BUGS
+
+   SEE ALSO
+
+amosextension/main/NextExtension                                   amosextension/main/NextExtension
+
+   NAME
+      NextExtension -- Description
+
+   SYNOPSIS
+      struct ExtensionDescriptor * NextExtensionItem(
+          struct ExtensionDescriptor * extension_descriptor);
+
+   FUNCTION
+		Find next AMOS command
+
+   INPUTS
+       extension_descriptor - Kind a like file descriptor, 
+				but is used keep track of where in extension we are.
+
+   RESULT
+       The result ...
+	
+		struct ExtensionDescriptor
+		{
+			unsigned int fileOffset;			// Offset in file, in memory
+			struct extension	*ext;			// We keep pointer to extension
+			struct TokenInfo	tokenInfo;		// Where store info about the AMOS command
+		};
+	
+   EXAMPLE
+
+		for ( ed = FirstExtensionItem( ext ); ed ; ed = NextExtensionItem( ed ))
+		{
+		}
+
+   NOTES
+
+   BUGS
+
+   SEE ALSO
+
+amosextension/main/OpenExtension                                   amosextension/main/OpenExtension
+
+   NAME
+      OpenExtension -- Description
+
+   SYNOPSIS
+      struct extension * OpenExtension(char * name);
+
+   FUNCTION
+		Open Amos Extension file
+
+   INPUTS
+       name - Name of AMOS lib with full path, normally 
+				AMOSPRO:APSystem/xxxxxx.lib
+
+   RESULT
+       The result ...
+
+		struct extension
+		{
+			char *file;						# Address of file in memory
+			struct fileHeader *header;		# Extension Header, size of blocks in extension.
+			unsigned short *sizeTable;		# list of Sizes of commands in bytes
+			struct command *commands;		# list of commands with address to 680x0 assembler routine, and size 
+of the code.
+		};
+
+   EXAMPLE
+
+   NOTES
+
+   BUGS
+
+   SEE ALSO
+
