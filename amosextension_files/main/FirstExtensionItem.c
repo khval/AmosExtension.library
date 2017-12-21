@@ -33,14 +33,27 @@
 *      struct ExtensionDescriptor * FirstExtensionItem(struct extension * ext);
 *
 *   FUNCTION
+*		Find first AMOS command in Extension.
 *
 *   INPUTS
-*       ext - 
+*       ext - extension struct, obtained by OpenExtension()
 *
 *   RESULT
 *       The result ...
+*	
+*		struct ExtensionDescriptor
+*		{
+*			unsigned int fileOffset;			// Offset in file, in memory
+*			struct extension	*ext;			// We keep pointer to extension
+*			struct TokenInfo	tokenInfo;		// Where store info about the AMOS command
+*		};
+*	
 *
 *   EXAMPLE
+*
+*		for ( ed = FirstExtensionItem( ext ); ed ; ed = NextExtensionItem( ed ))
+*		{
+*		}
 *
 *   NOTES
 *

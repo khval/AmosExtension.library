@@ -36,11 +36,21 @@
 *   FUNCTION
 *
 *   INPUTS
-*       ext - 
-*       token - 
+*       ext - Amos extension, to read from.
+*       token - token number to find.
 *
 *   RESULT
 *       The result ...
+*
+*		struct TokenInfo
+*		{
+*			unsigned short token;		# token number, should be the same one argument
+*			short NumberOfInstruction;	# index value to be used in command table
+*			short NumberOfFunction;		# I'm not shore about this one
+*			char *command;				# Name of AMOS command
+*			char *args;					# Argument of AMOS command (in AMOS format) 
+*		};
+*
 *
 *   EXAMPLE
 *

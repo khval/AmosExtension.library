@@ -34,12 +34,22 @@
 *      struct extension * OpenExtension(char * name);
 *
 *   FUNCTION
+*		Open Amos Extension file
 *
 *   INPUTS
-*       name - 
+*       name - Name of AMOS lib with full path, normally 
+*				AMOSPRO:APSystem/xxxxxx.lib
 *
 *   RESULT
 *       The result ...
+*
+*		struct extension
+*		{
+*			char *file;						# Address of file in memory
+*			struct fileHeader *header;		# Extension Header, size of blocks in extension.
+*			unsigned short *sizeTable;		# list of Sizes of commands in bytes
+*			struct command *commands;		# list of commands with address to 680x0 assembler routine, and size of the code.
+*		};
 *
 *   EXAMPLE
 *

@@ -34,14 +34,28 @@
 *          struct ExtensionDescriptor * extension_descriptor);
 *
 *   FUNCTION
+*		This command should be used if extension_descriptor
+*		is not NULL, for example if you exit the loop early.
 *
 *   INPUTS
-*       extension_descriptor - 
+*       extension_descriptor - Kind a like file descriptor, 
+*				but is used keep track of where in extension we are.
 *
 *   RESULT
 *       This function does not return a result
 *
 *   EXAMPLE
+*
+*		for ( ed = FirstExtensionItem( ext ); ed ; ed = NextExtensionItem( ed ))
+*		{
+*			if (strcmp( ed -> tokenInfo.command, "find command")==0)
+*			{
+*				CloseExtensionDescriptor(ed);	// clean up before exit loop
+*				ed = NULL;
+*				break;
+*			}
+*		}
+*
 *
 *   NOTES
 *

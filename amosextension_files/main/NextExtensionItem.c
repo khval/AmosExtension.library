@@ -36,14 +36,27 @@
 *          struct ExtensionDescriptor * extension_descriptor);
 *
 *   FUNCTION
+*		Find next AMOS command
 *
 *   INPUTS
-*       extension_descriptor - 
+*       extension_descriptor - Kind a like file descriptor, 
+*				but is used keep track of where in extension we are.
 *
 *   RESULT
 *       The result ...
-*
+*	
+*		struct ExtensionDescriptor
+*		{
+*			unsigned int fileOffset;			// Offset in file, in memory
+*			struct extension	*ext;			// We keep pointer to extension
+*			struct TokenInfo	tokenInfo;		// Where store info about the AMOS command
+*		};
+*	
 *   EXAMPLE
+*
+*		for ( ed = FirstExtensionItem( ext ); ed ; ed = NextExtensionItem( ed ))
+*		{
+*		}
 *
 *   NOTES
 *

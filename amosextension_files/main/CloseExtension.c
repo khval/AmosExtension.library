@@ -34,12 +34,10 @@
 *      void CloseExtension(struct extension * extension);
 *
 *   FUNCTION
+*		Close AMOS Extension file
 *
 *   INPUTS
-*       extension - 
-*
-*   RESULT
-*       This function does not return a result
+*       extension - Pointer to AMOS extension to close
 *
 *   EXAMPLE
 *

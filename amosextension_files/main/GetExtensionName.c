@@ -36,10 +36,10 @@
 *   FUNCTION
 *
 *   INPUTS
-*       ext - 
+*       ext - extension struct, obtained by OpenExtension()
 *
 *   RESULT
-*       The result ...
+*       The result name of Extension, use free() to free memory.
 *
 *   EXAMPLE
 *
