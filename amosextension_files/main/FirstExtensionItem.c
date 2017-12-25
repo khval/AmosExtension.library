@@ -16,6 +16,7 @@
 
 #include <exec/exec.h>
 #include <proto/exec.h>
+#include <proto/dos.h>
 #include <dos/dos.h>
 #include <exec/types.h>
 #include <libraries/amosextension.h>
@@ -73,6 +74,7 @@ struct tokenDefine
 };
 
 #define _file_offset_ ret->fileOffset
+#define _ext_			ret->ext
 
 struct ExtensionDescriptor * _amosextension_FirstExtensionItem(struct AmosExtensionIFace *Self,
        struct extension * ext)
@@ -92,8 +94,11 @@ struct ExtensionDescriptor * _amosextension_FirstExtensionItem(struct AmosExtens
 	ret = (struct ExtensionDescriptor *) libBase -> IExec -> AllocVecTags( sizeof(struct ExtensionDescriptor) , AVT_Type, MEMF_SHARED, AVT_ClearWithValue, 0 , TAG_END );
 
 	ret -> ext = ext;
-	ret -> fileOffset = ext -> header -> C_off_size + sizeof(struct fileHeader) + 0x20;
+	ret -> blockStart = ext -> header -> C_off_size + sizeof(struct fileHeader) + 0x20;
+	ret -> fileOffset = ret -> blockStart;
 	ret -> tokenInfo.token = (_file_offset_ - 0x20) -  ext -> header -> C_off_size - 0x16;
+
+//	libBase -> IDOS -> Printf("\n\nfile pos %08lx\n\n", ret -> fileOffset );
 
 	sread(&ret -> tokenInfo.NumberOfInstruction, sizeof(short), 1);
 	sread(&ret -> tokenInfo.NumberOfFunction, sizeof(short), 1);
