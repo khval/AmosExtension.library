@@ -18,7 +18,7 @@ struct _Library
 
 #define sread( dest, usize, n )		\
 	{							\
-		memcpy( (char *) (dest), ext -> file + _file_offset_, usize *n );	\
+		memcpy( (char *) (dest), _ext_ -> file + _file_offset_, usize *n );	\
 		_file_offset_ += (usize * n);								\
 	}
 

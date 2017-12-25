@@ -64,6 +64,8 @@
 *
 */
 
+#define _ext_ ext
+
 struct TokenInfo * _amosextension_GetCommandByToken(struct AmosExtensionIFace *Self,
 	struct extension *ext, unsigned short token)
 {

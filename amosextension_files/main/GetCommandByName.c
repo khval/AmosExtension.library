@@ -62,6 +62,8 @@ struct tokenDefine
 	char arg[256];
 };
 
+#define _ext_ ext
+
 struct TokenInfo *_amosextension_GetCommandByName(struct AmosExtensionIFace *Self,
 	struct extension *ext, char * cmdName)
 {
