@@ -71,6 +71,14 @@
 #define _file_offset_	ret->fileOffset
 #define ext			ret->ext
 
+#define debug 0
+
+#if (debug)
+#define DPrintf 			libBase -> IDOS -> Printf
+#else
+#define DPrintf( fmt , ... ) 
+#endif
+
 struct ExtensionDescriptor * _amosextension_NextExtensionItem(struct AmosExtensionIFace *Self,
        struct ExtensionDescriptor * extension_descriptor)
 {
@@ -88,8 +96,14 @@ struct ExtensionDescriptor * _amosextension_NextExtensionItem(struct AmosExtensi
 	ret = extension_descriptor;
 
 	// free old
+	if (ret -> tokenInfo.command)
+	{
+		char *s,*d = command;
+		for (s=ret -> tokenInfo.command;*s;s++) *d++=*s;
+		*d=0;
 
-	if (ret -> tokenInfo.command) free(ret -> tokenInfo.command);
+		 free(ret -> tokenInfo.command);
+	}
 	if (ret -> tokenInfo.args) free(ret -> tokenInfo.args);
 
 	// clear
@@ -97,8 +111,12 @@ struct ExtensionDescriptor * _amosextension_NextExtensionItem(struct AmosExtensi
 	ret -> tokenInfo.command  = NULL;
 	ret -> tokenInfo.args  = NULL;
 
+	// last value is dc.b
+
 	// align to 16 bit.
 	if (ret->fileOffset & 1) sread( &c,1,1);
+
+	DPrintf("%s::filepos: %08lx\n",__FUNCTION__,ret->fileOffset);
 
 	ret -> tokenInfo.token = (unsigned short) ((_file_offset_ - 0x20) -  ext -> header -> C_off_size - 0x16);
 
@@ -110,8 +128,12 @@ struct ExtensionDescriptor * _amosextension_NextExtensionItem(struct AmosExtensi
 		return NULL;
 	}
 
+	DPrintf("%s::NumberOfInstruction: %08lx\n",__FUNCTION__,ret -> tokenInfo.NumberOfInstruction);
+
 	sread(&ret -> tokenInfo.NumberOfFunction, sizeof(short), 1);
 	sread( &c,1,1);
+
+	DPrintf("%s::NumberOfFunction: %08lx\n",__FUNCTION__,ret -> tokenInfo.NumberOfFunction);
 
 	c_count = 0;
 	a_count = 0;
@@ -142,10 +164,10 @@ struct ExtensionDescriptor * _amosextension_NextExtensionItem(struct AmosExtensi
 	// terminate string only if we have new command.
 	if (c_count>0) 
 	{
-		int n = strlen( command );
+		int n = c_count;
 		command[ c_count ] = 0;	// terminate string.
 
-		while ((n>0) && (command[n-1]==' '))
+		while ((n>0) && (command[n-1]==' '))	// remove spaces at end line.
 		{
 			command[n-1]=0;
 			n--;
@@ -153,13 +175,15 @@ struct ExtensionDescriptor * _amosextension_NextExtensionItem(struct AmosExtensi
 	}
 	arg[ a_count ] = 0;
 
-	if ((c_count>0)&&(a_count>0))
+	if ((c_count>0)||(a_count>0))
 	{
 		ret -> tokenInfo.command = strdup(command);
 		ret -> tokenInfo.args = strdup(arg);
 	}
 	else
 	{
+		DPrintf("%s::Exit no args or commands exit\n",__FUNCTION__);
+
 		libBase -> IExec-> FreeVec( ret );
 		ret = NULL;
 	}
