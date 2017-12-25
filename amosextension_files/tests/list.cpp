@@ -15,7 +15,7 @@ int main()
 
 	if (init())
 	{
-		ext = OpenExtension( (char *) "amospro:APSystem/AMOSPro_Request.lib");
+		ext = OpenExtension( (char *) "amospro:APSystem/AMOSPro_Misc.lib");
 
 		if (ext)
 		{
