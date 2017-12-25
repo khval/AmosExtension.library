@@ -22,15 +22,14 @@ int main()
 			for ( ed =FirstExtensionItem( ext ); ed ; ed = NextExtensionItem( ed ))
 			{
 				printf("%04X,%04x,%d,%d\n", 
-							ed -> fileOffset,
-							ed -> tokenInfo.token,
-							ed -> tokenInfo.NumberOfInstruction,
-							ed -> tokenInfo.NumberOfFunction);
+						ed -> fileOffset,
+						ed -> tokenInfo.token,
+						ed -> tokenInfo.NumberOfInstruction,
+						ed -> tokenInfo.NumberOfFunction);
 
 				printf("%s: %s\n", 
 						(ed -> tokenInfo.command) ? ed -> tokenInfo.command : "NULL",
-						(ed -> tokenInfo.args) ? ed -> tokenInfo.args : "NULL"
-					);
+						(ed -> tokenInfo.args) ? ed -> tokenInfo.args : "NULL");
 			}
 
 			CloseExtension(ext);
