@@ -41,7 +41,7 @@ main_SRCS = main/Obtain.c main/Release.c main/OpenExtension.c \
 # -------------------------------------------------------------
 # Nothing should need changing below this line
 
-SRCS = init.c
+SRCS = init.c 
 
 OBJS = $(main_SRCS:.c=.o)  $(SRCS:.c=.o)
 # Rules for building

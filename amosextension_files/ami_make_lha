@@ -1,0 +1,25 @@
+
+if exists ram:AmosExtension.library
+	delete ram:AmosExtension.library all
+endif
+
+makedir ram:AmosExtension.library
+makedir ram:AmosExtension.library/libs
+makedir ram:AmosExtension.library/autodocs
+makedir ram:AmosExtension.library/include
+makedir ram:AmosExtension.library/tests
+
+copy AmosExtension.library ram:AmosExtension.library/libs
+copy amosextension.doc ram:AmosExtension.library/autodocs
+copy /include/#? ram:AmosExtension.library/include ALL
+copy tests/#?.exe ram:AmosExtension.library/tests ALL
+
+copy ENVARC:Sys/def_ascii.info ram:AmosExtension.library/autodocs/amosextension.doc.info
+copy ENVARC:Sys/def_drawer.info ram:AmosExtension.library.info
+copy ENVARC:Sys/def_drawer.info ram:AmosExtension.library/libs.info
+copy ENVARC:Sys/def_drawer.info ram:AmosExtension.library/autodocs.info
+copy ENVARC:Sys/def_drawer.info ram:AmosExtension.library/include.info
+copy ENVARC:Sys/def_drawer.info ram:AmosExtension.library/tests.info
+
+lha -r a ram:AmosExtension.library.lha ram:AmosExtension.library
+lha a ram:AmosExtension.library.lha ram:AmosExtension.library.info
