@@ -30,7 +30,7 @@ TARGET = amosextension.library
 LIBS = 
 
 # Version of the library to build
-VERSION = 53
+VERSION = 1
 
 # "main" Interface Source Files
 main_SRCS = main/Obtain.c main/Release.c main/OpenExtension.c \
