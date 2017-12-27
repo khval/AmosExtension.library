@@ -3,6 +3,10 @@ if exists ram:AmosExtension.library
 	delete ram:AmosExtension.library all
 endif
 
+if exists ram:AmosExtension.library.lha
+	delete ram:AmosExtension.library.lha 
+endif
+
 makedir ram:AmosExtension.library
 makedir ram:AmosExtension.library/libs
 makedir ram:AmosExtension.library/autodocs
@@ -13,7 +17,11 @@ copy AmosExtension.library ram:AmosExtension.library/libs
 copy amosextension.doc ram:AmosExtension.library/autodocs
 copy /include/#? ram:AmosExtension.library/include ALL
 copy tests/#?.exe ram:AmosExtension.library/tests ALL
+copy /Readme.md ram:AmosExtension.library/readme.txt
+copy /LICENSE ram:AmosExtension.library/LICENSE.txt
 
+copy ENVARC:Sys/def_ascii.info ram:AmosExtension.library/readme.txt.info
+copy ENVARC:Sys/def_ascii.info ram:AmosExtension.library/LICENSE.txt.info
 copy ENVARC:Sys/def_ascii.info ram:AmosExtension.library/autodocs/amosextension.doc.info
 copy ENVARC:Sys/def_drawer.info ram:AmosExtension.library.info
 copy ENVARC:Sys/def_drawer.info ram:AmosExtension.library/libs.info
