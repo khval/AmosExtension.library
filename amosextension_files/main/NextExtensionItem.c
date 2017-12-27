@@ -152,8 +152,6 @@ struct ExtensionDescriptor * _amosextension_NextExtensionItem(struct AmosExtensi
 	is_command = TRUE;	// we expect command.
 	while ((c != -1) && (c != -2))
 	{
-//		libBase->IDOS->Printf("c count %ld, a count %ld num %lx\n", c_count, a_count, (int) ((unsigned char) c) );
-
 		if ( (c & 127) > 0)
 		{
 			// if AmosPro_Misc.lib has a name that has char \0
@@ -179,8 +177,6 @@ struct ExtensionDescriptor * _amosextension_NextExtensionItem(struct AmosExtensi
 		sread( &c,1,1);
 	}
 
-//	libBase->IDOS->Printf("c count %ld, a count %ld\n", c_count, a_count);
-
 	// terminate string only if we have new command.
 	if (c_count>0) 
 	{
@@ -195,7 +191,12 @@ struct ExtensionDescriptor * _amosextension_NextExtensionItem(struct AmosExtensi
 	}
 	arg[ a_count ] = 0;
 
-	ret -> tokenInfo.command = c_count>0 ? strdup(command) : NULL;
+	// it should allways copy from command, if no command is found, it should use last command it found in the list
+
+	ret -> tokenInfo.command = strdup(command);
+
+	// this line looks ok, no need to copy string if no arg is found, all functions should have argument if there is a command.
+
 	ret -> tokenInfo.args = a_count>0 ? strdup(arg) : NULL;
 
 	return ret;
