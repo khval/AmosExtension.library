@@ -26,3 +26,4 @@ extern char *               VARARGS68K _amosextension_GetExtensionName(struct Am
 extern struct ExtensionDescriptor * VARARGS68K _amosextension_FirstExtensionItem(struct AmosExtensionIFace *, struct extension * ext);
 extern struct ExtensionDescriptor * VARARGS68K _amosextension_NextExtensionItem(struct AmosExtensionIFace *, struct ExtensionDescriptor * extension_descriptor);
 extern void                 VARARGS68K _amosextension_CloseExtensionDescriptor(struct AmosExtensionIFace *, struct ExtensionDescriptor * extension_descriptor);
+extern char *               VARARGS68K _amosextension_GetExtensionNameByToken(struct AmosExtensionIFace *, struct extension * ext, unsigned short token);

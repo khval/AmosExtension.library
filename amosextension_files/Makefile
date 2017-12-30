@@ -36,7 +36,8 @@ VERSION = 1
 main_SRCS = main/Obtain.c main/Release.c main/OpenExtension.c \
     main/CloseExtension.c main/GetCommandByName.c main/GetCommandByToken.c \
     main/FreeTokenInfo.c main/GetExtensionName.c main/FirstExtensionItem.c \
-    main/NextExtensionItem.c main/CloseExtensionDescriptor.c 
+    main/NextExtensionItem.c main/CloseExtensionDescriptor.c \
+    main/GetExtensionNameByToken.c 
 
 # -------------------------------------------------------------
 # Nothing should need changing below this line

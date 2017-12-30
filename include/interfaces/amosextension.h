@@ -44,6 +44,7 @@ struct AmosExtensionIFace
 	struct ExtensionDescriptor * APICALL (*FirstExtensionItem)(struct AmosExtensionIFace *Self, struct extension * ext);
 	struct ExtensionDescriptor * APICALL (*NextExtensionItem)(struct AmosExtensionIFace *Self, struct ExtensionDescriptor * extension_descriptor);
 	void APICALL (*CloseExtensionDescriptor)(struct AmosExtensionIFace *Self, struct ExtensionDescriptor * extension_descriptor);
+	char * APICALL (*GetExtensionNameByToken)(struct AmosExtensionIFace *Self, struct extension * ext, unsigned short token);
 };
 
 #ifdef __cplusplus

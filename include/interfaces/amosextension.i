@@ -23,6 +23,7 @@ STRUCTURE AmosExtensionIFace, InterfaceData_SIZE
 	    FPTR IAmosExtension_FirstExtensionItem
 	    FPTR IAmosExtension_NextExtensionItem
 	    FPTR IAmosExtension_CloseExtensionDescriptor
+	    FPTR IAmosExtension_GetExtensionNameByToken
 	LABEL AmosExtensionIFace_SIZE
 
 #endif

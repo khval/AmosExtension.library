@@ -18,6 +18,7 @@ STATIC CONST APTR main_v1_vectors[] =
     _amosextension_FirstExtensionItem,
     _amosextension_NextExtensionItem,
     _amosextension_CloseExtensionDescriptor,
+    _amosextension_GetExtensionNameByToken,
     (APTR)-1
 };
 

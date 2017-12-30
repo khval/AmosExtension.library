@@ -35,5 +35,6 @@
 #define FirstExtensionItem(ext) IAmosExtension->FirstExtensionItem((ext)) 
 #define NextExtensionItem(extension_descriptor) IAmosExtension->NextExtensionItem((extension_descriptor)) 
 #define CloseExtensionDescriptor(extension_descriptor) IAmosExtension->CloseExtensionDescriptor((extension_descriptor)) 
+#define GetExtensionNameByToken(ext, token) IAmosExtension->GetExtensionNameByToken((ext), (token)) 
 
 #endif /* INLINE4_AMOSEXTENSION_H */

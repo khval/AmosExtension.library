@@ -36,7 +36,11 @@
 		</method>
 		<method name="CloseExtensionDescriptor" result="void">
 			<arg name="extension_descriptor" type="struct ExtensionDescriptor *"/>
-		</method>	
+		</method>
+		<method name="GetExtensionNameByToken" result="char *">
+			<arg name="ext" type="struct extension *"/>
+			<arg name="token" type="unsigned short"/>
+		</method>
 	</interface>
 </library>
 
