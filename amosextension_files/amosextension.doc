@@ -7,13 +7,14 @@ amosextension/main/FreeTokenInfo
 amosextension/main/GetCommandByName
 amosextension/main/GetCommandByToken
 amosextension/main/GetExtensionName
+amosextension/main/GetExtensionNameByToken
 amosextension/main/NextExtension
 amosextension/main/Obtain
 amosextension/main/OpenExtension
 amosextension/main/Release
 
 
-amosextension/main/CloseExtension                                 amosextension/main/CloseExtension
+amosextension/main/CloseExtension                                 amosextension/main/CloseExtension
 
    NAME
       CloseExtension -- Description
@@ -35,7 +36,7 @@ amosextension/main/CloseExtension                                 amosextension/
 
    SEE ALSO
 
-amosextension/main/CloseExtensionDescriptor             amosextension/main/CloseExtensionDescriptor
+amosextension/main/CloseExtensionDescriptor             amosextension/main/CloseExtensionDescriptor
 
    NAME
       CloseExtensionDescriptor -- Description
@@ -74,7 +75,7 @@ amosextension/main/CloseExtensionDescriptor             amosextension/main/Close
 
    SEE ALSO
 
-amosextension/main/FirstExtension                                 amosextension/main/FirstExtension
+amosextension/main/FirstExtension                                 amosextension/main/FirstExtension
 
    NAME
       FirstExtension -- Description
@@ -111,7 +112,7 @@ amosextension/main/FirstExtension                                 amosextension/
 
    SEE ALSO
 
-amosextension/main/FreeTokenInfo                                   amosextension/main/FreeTokenInfo
+amosextension/main/FreeTokenInfo                                   amosextension/main/FreeTokenInfo
 
    NAME
       FreeTokenInfo -- Description
@@ -135,7 +136,7 @@ amosextension/main/FreeTokenInfo                                   amosextension
 
    SEE ALSO
 
-amosextension/main/GetCommandByName                             amosextension/main/GetCommandByName
+amosextension/main/GetCommandByName                             amosextension/main/GetCommandByName
 
    NAME
       GetCommandByName -- Description
@@ -160,7 +161,7 @@ amosextension/main/GetCommandByName                             amosextension/ma
 
    SEE ALSO
 
-amosextension/main/GetCommandByToken                           amosextension/main/GetCommandByToken
+amosextension/main/GetCommandByToken                           amosextension/main/GetCommandByToken
 
    NAME
       GetCommandByToken -- Description
@@ -195,7 +196,7 @@ amosextension/main/GetCommandByToken                           amosextension/mai
 
    SEE ALSO
 
-amosextension/main/GetExtensionName                             amosextension/main/GetExtensionName
+amosextension/main/GetExtensionName                             amosextension/main/GetExtensionName
 
    NAME
       GetExtensionName -- Description
@@ -219,7 +220,38 @@ amosextension/main/GetExtensionName                             amosextension/ma
 
    SEE ALSO
 
-amosextension/main/NextExtension                                   amosextension/main/NextExtension
+amosextension/main/GetExtensionNameByToken               amosextension/main/GetExtensionNameByToken
+
+   NAME
+      GetExtensionNameByToken -- Description
+
+   SYNOPSIS
+      char * GetExtensionNameByToken(struct extension * ext, 
+          unsigned short token);
+
+   FUNCTION
+	This function is guaranteed  to find a name, while normaly token don't always have a name,
+	but instead depend on previous token. this function scans the token list to find previous names.
+
+	So if most find a name use this, if you don't need the name use GetCommandByToken() its quicker.
+
+   INPUTS
+       ext - Extension struct, obtained by OpenExtension()
+       token - Token number
+
+   RESULT
+       If name is found a string is returned if token number is wrong, this function should return 
+NULL.
+
+   EXAMPLE
+
+   NOTES
+
+   BUGS
+
+   SEE ALSO
+
+amosextension/main/NextExtension                                   amosextension/main/NextExtension
 
    NAME
       NextExtension -- Description
@@ -257,7 +289,30 @@ amosextension/main/NextExtension                                   amosextension
 
    SEE ALSO
 
-amosextension/main/OpenExtension                                   amosextension/main/OpenExtension
+amosextension/main/Obtain                                                 amosextension/main/Obtain
+
+   NAME
+      Obtain -- Description
+
+   SYNOPSIS
+      ULONG Obtain(void);
+
+   FUNCTION
+
+   INPUTS
+
+   RESULT
+       The result ...
+
+   EXAMPLE
+
+   NOTES
+
+   BUGS
+
+   SEE ALSO
+
+amosextension/main/OpenExtension                                   amosextension/main/OpenExtension
 
    NAME
       OpenExtension -- Description
@@ -292,3 +347,27 @@ of the code.
 
    SEE ALSO
 
+amosextension/main/Release                                               amosextension/main/Release
+
+   NAME
+      Release -- Description
+
+   SYNOPSIS
+      ULONG Release(void);
+
+   FUNCTION
+
+   INPUTS
+
+   RESULT
+       The result ...
+
+   EXAMPLE
+
+   NOTES
+
+   BUGS
+
+   SEE ALSO
+
+
