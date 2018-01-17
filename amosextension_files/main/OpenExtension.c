@@ -21,6 +21,8 @@
 #include <proto/dos.h>
 #include <libraries/amosextension.h>
 #include <proto/amosextension.h>
+
+#include <string.h>
 #include <stdarg.h>
 
 #include "../libbase.h"
@@ -79,6 +81,18 @@ void init_command_list( struct extension *ext , int commands )
 	}
 }
 
+struct errorFix
+{
+	const char *name;
+	int token_error_offset;
+};
+
+static struct errorFix errortab[] =
+{
+	{"AMOSPro_TURBO_Plus.Lib",4}
+};
+
+
 struct extension * _amosextension_OpenExtension(struct AmosExtensionIFace *Self,
        char * name)
 {
@@ -87,6 +101,8 @@ struct extension * _amosextension_OpenExtension(struct AmosExtensionIFace *Self,
 	BPTR file;
 	unsigned int filesize;
 	unsigned int commands;
+	char *ptr, *cptr;
+	int n;
 
 	ext = (struct extension *) libBase->IExec->AllocVecTags( sizeof(struct extension) , AVT_Type, MEMF_SHARED, AVT_ClearWithValue, 0 , TAG_END );
 
@@ -108,6 +124,26 @@ struct extension * _amosextension_OpenExtension(struct AmosExtensionIFace *Self,
 			commands = ext -> header -> C_off_size / 2;
 			ext -> commands = (struct command *)  libBase -> IExec -> AllocVecTags( sizeof(struct command) * commands , AVT_Type, MEMF_SHARED, AVT_ClearWithValue, 0 , TAG_END );
 			if (ext -> commands) init_command_list( ext , commands );
+
+			cptr = name;
+			for (ptr = name + strlen(name); ptr > name ; ptr-- )
+			{
+				if ((*ptr=='/')||(*ptr==':'))
+				{
+					cptr = ptr+1;
+					break;
+				}
+			}
+			
+			ext -> token_error_offset = 0;
+			for (n=0; n < sizeof(errortab)/sizeof(struct errorFix);n++)
+			{
+				if (strcasecmp(errortab[n].name,cptr)==0)
+				{
+					ext -> token_error_offset = errortab[n].token_error_offset;
+					break;
+				}	
+			}
 
 			libBase -> IDOS -> FClose( file );
 		}	
