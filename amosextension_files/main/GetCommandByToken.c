@@ -82,7 +82,7 @@ struct TokenInfo * _amosextension_GetCommandByToken(struct AmosExtensionIFace *S
 	info = (struct TokenInfo *) libBase->IExec->AllocVecTags( sizeof(struct TokenInfo) , AVT_Type, MEMF_SHARED, AVT_ClearWithValue, 0 , TAG_END );
 	if (!info) return NULL;
 
-	_file_offset_ = token + 0x20 + ext -> header -> C_off_size + 0x16;
+	_file_offset_ = token + 0x20 + ext -> header -> C_off_size + 0x16 - ext -> token_error_offset;
 
 	sread(&info -> NumberOfInstruction, sizeof(short), 1);
 	sread(&info -> NumberOfFunction, sizeof(short), 1);

@@ -129,7 +129,7 @@ struct ExtensionDescriptor * _amosextension_NextExtensionItem(struct AmosExtensi
 */
 
 
-	ret -> tokenInfo.token = (unsigned short) ((_file_offset_ - 0x20) -  ret -> ext -> header -> C_off_size - 0x16);
+	ret -> tokenInfo.token = (unsigned short) ((_file_offset_ - 0x20) -  ret -> ext -> header -> C_off_size - 0x16) + ret -> ext -> token_error_offset;
 
 	sread(&ret -> tokenInfo.NumberOfInstruction, sizeof(short), 1);
 

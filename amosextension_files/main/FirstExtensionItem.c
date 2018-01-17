@@ -94,9 +94,9 @@ struct ExtensionDescriptor * _amosextension_FirstExtensionItem(struct AmosExtens
 	ret = (struct ExtensionDescriptor *) libBase -> IExec -> AllocVecTags( sizeof(struct ExtensionDescriptor) , AVT_Type, MEMF_SHARED, AVT_ClearWithValue, 0 , TAG_END );
 
 	ret -> ext = ext;
-	ret -> blockStart = ext -> header -> C_off_size + sizeof(struct fileHeader) + 0x20;
+	ret -> blockStart = ext -> header -> C_off_size + sizeof(struct fileHeader) + 0x20 ;
 	ret -> fileOffset = ret -> blockStart;
-	ret -> tokenInfo.token = (_file_offset_ - 0x20) -  ext -> header -> C_off_size - 0x16;
+	ret -> tokenInfo.token = (_file_offset_ - 0x20) -  ext -> header -> C_off_size - 0x16 + ext -> token_error_offset;
 
 //	libBase -> IDOS -> Printf("\n\nfile pos %08lx\n\n", ret -> fileOffset );
 
