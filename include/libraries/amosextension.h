@@ -22,6 +22,7 @@ struct extension
 	struct fileHeader *header;
 	unsigned short *sizeTable;
 	struct command *commands;
+	unsigned short token_error_offset;		// so some token number are wrong in some extensions, don't know way, but start offset most be off.
 };
 
 struct TokenInfo

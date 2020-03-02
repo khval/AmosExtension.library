@@ -89,7 +89,8 @@ struct errorFix
 
 static struct errorFix errortab[] =
 {
-	{"AMOSPro_TURBO_Plus.Lib",4}
+	{"AMOSPro_TURBO_Plus.Lib",4},
+	{"AMOSPro_CRAFT.Lib",4}
 };
 
 
