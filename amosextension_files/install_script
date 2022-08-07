@@ -1,5 +1,7 @@
 copy /include/#? sdk:Include/include_h/ all
 
+avail flush
+
 IF EXISTS amosextension.library
 copy amosextension.library libs:
 endif
